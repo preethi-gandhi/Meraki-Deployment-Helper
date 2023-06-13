@@ -11,18 +11,23 @@
 
 # Procedure:
 1. Go to the Project directory and create a virtual environment -
+
     /usr/local/bin/python3 -m venv env
 
 2. Activate the virtual environment -
+
     source env/bin/activate
 
 3. Install packages in "requirements.txt" - 
+
     pip3 install -r requirements.txt
  
 4. Generate API key for your account in the Meraki Dashboard. Set API Key as an environment variable -
-    export MERAKI_DASHBOARD_API_KEY=<aaaaaa>
+
+    export MERAKI_DASHBOARD_API_KEY=xxx
   
 5. Exit the environment and activate the virtual environment again.
   
 6. Run the configuration script -
+    
     python3 configuration_CL.py
