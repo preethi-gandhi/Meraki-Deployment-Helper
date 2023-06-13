@@ -1,0 +1,464 @@
+---
+MX1:
+  vlans:
+    vlan1:
+     id: 10
+     name: Vlan10
+     applianceIp: 192.168.10.10
+     subnet: 192.168.10.0/24
+     fixedIpAssignments: {}
+     reservedIpRanges: []
+     dnsNameservers: upstream_dns
+     dhcpHandling: Run a DHCP server
+     dhcpLeaseTime: 1 day
+     dhcpBootOptionsEnabled: false
+     dhcpOptions: []
+     ipv6:
+        enabled: false
+     mandatoryDhcp:
+        enabled: false
+
+    vlan2:
+     id: 20
+     name: Employee vlan
+     applianceIp: 192.168.20.10
+     subnet: 192.168.20.0/24
+     fixedIpAssignments: {}
+     reservedIpRanges: []
+     dnsNameservers: upstream_dns
+     dhcpHandling: Run a DHCP server
+     dhcpLeaseTime: 1 day
+     dhcpBootOptionsEnabled: false
+     dhcpOptions: []
+     ipv6:
+        enabled: false
+     mandatoryDhcp:
+        enabled: false
+    
+    vlan3:
+     id: 30
+     name: Guest vlan
+     applianceIp: 192.168.30.10
+     subnet: 192.168.30.0/24
+     fixedIpAssignments: {}
+     reservedIpRanges: []
+     dnsNameservers: upstream_dns
+     dhcpHandling: Run a DHCP server
+     dhcpLeaseTime: 1 day
+     dhcpBootOptionsEnabled: false
+     dhcpOptions: []
+     ipv6:
+        enabled: false
+     mandatoryDhcp:
+        enabled: false
+
+  applianceports:
+    Port5:
+     enabled: true
+     type: trunk
+     dropUntaggedTraffic: false
+     vlan: 10
+     allowedVlans: '10,20,30'
+
+  L7FirewallRules:
+    - policy: deny
+      type: application
+      value:
+        id: meraki:layer7/application/33
+        name: Facebook
+    - policy: deny
+      type: application
+      value:
+        id: meraki:layer7/application/110
+        name: BitTorrent
+
+
+
+MS1:
+  managementVlan: 10
+
+  switchports:
+    Port1:
+     name: "MX Uplink"
+     tags: ['uplink']
+     enabled: true
+     poeEnabled: true
+     type: trunk
+     vlan: 10
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+     
+    Port2:
+     name: "Uplink to ap01"
+     tags: ['mgmt', 'ap']
+     enabled: true
+     poeEnabled: true
+     type: trunk
+     vlan: 10
+     voiceVlan: null
+     allowedVlans: "10,20,30"
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+  
+    Port3:
+     name: "Uplink to ap02"
+     tags: ['mgmt', 'ap']
+     enabled: false
+     poeEnabled: true
+     type: trunk
+     vlan: 10
+     voiceVlan: null
+     allowedVlans: "10,20,30"
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+  
+    Port4:
+     name: "Uplink to ap03"
+     tags: ['mgmt', 'ap']
+     enabled: false
+     poeEnabled: true
+     type: trunk
+     vlan: 10
+     voiceVlan: null
+     allowedVlans: "10,20,30"
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+  
+    Port5:
+     name: Reserved
+     tags: ['mgmt', 'reserved']
+     enabled: false
+     poeEnabled: true
+     type: access
+     vlan: 1
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+
+    Port6:
+     name: "HANDHELD POS 2"
+     tags: ['access', 'pos']
+     enabled: true
+     poeEnabled: true
+     type: access
+     vlan: 20
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+
+    Port7:
+     name: UNASSIGNED
+     tags: ['mgmt', 'unused']
+     enabled: false
+     poeEnabled: true
+     type: access
+     vlan: 1
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+
+    Port8:
+     name: UNASSIGNED
+     tags: ['mgmt', 'unused']
+     enabled: false
+     poeEnabled: true
+     type: access
+     vlan: 1
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+  
+    Port9:
+     name: BOPC
+     tags: ['access', 'pos']
+     enabled: true
+     poeEnabled: true
+     type: access
+     vlan: 20
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+  
+    Port10:
+     name: UNASSIGNED
+     tags: ['access', 'pos']
+     enabled: false
+     poeEnabled: true
+     type: access
+     vlan: 20
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+  
+    Port11:
+     name: REG1
+     tags: ['access', 'pos']
+     enabled: true
+     poeEnabled: true
+     type: access
+     vlan: 20
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+  
+    Port12:
+     name: REG2
+     tags: ['access', 'pos']
+     enabled: true
+     poeEnabled: true
+     type: access
+     vlan: 20
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+  
+    Port13:
+     name: REG3
+     tags: ['access', 'pos']
+     enabled: true
+     poeEnabled: true
+     type: access
+     vlan: 20
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+  
+    Port14:
+     name: "REG4 / ENHANCED POS -DRIVE THRU"
+     tags: ['access', 'pos']
+     enabled: true
+     poeEnabled: true
+     type: access
+     vlan: 20
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+  
+    Port15:
+     name: "TEMP1"
+     tags: ['access', 'pos']
+     enabled: true
+     poeEnabled: true
+     type: access
+     vlan: 20
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+  
+    Port16:
+     name: "TEMP2"
+     tags: ['access', 'pos']
+     enabled: true
+     poeEnabled: true
+     type: access
+     vlan: 20
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+  
+    Port17:
+     name: "TEMP3"
+     tags: ['access', 'pos']
+     enabled: true
+     poeEnabled: true
+     type: access
+     vlan: 20
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+  
+    Port18:
+     name: "TEMP4"
+     tags: ['access', 'pos']
+     enabled: true
+     poeEnabled: true
+     type: access
+     vlan: 20
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+  
+    Port19:
+     name: "TEMP5"
+     tags: ['access', 'pos']
+     enabled: true
+     poeEnabled: true
+     type: access
+     vlan: 20
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+  
+    Port20:
+     name: "TEMP6"
+     tags: ['access', 'pos']
+     enabled: true
+     poeEnabled: true
+     type: access
+     vlan: 20
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+  
+    Port21:
+     name: "SITE PRODUCTION CONTROLLER 1"
+     tags: ['access', 'pos']
+     enabled: true
+     poeEnabled: true
+     type: access
+     vlan: 20
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+  
+    Port22:
+     name: "HANDHELD POS 1"
+     tags: ['access', 'pos']
+     enabled: true
+     poeEnabled: true
+     type: access
+     vlan: 20
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+  
+    Port23:
+     name: "SITE PRODUCTION CONTROLLER 2"
+     tags: ['access', 'pos']
+     enabled: true
+     poeEnabled: true
+     type: access
+     vlan: 20
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+  
+    Port24:
+     name: "TEMP7"
+     tags: ['access', 'pos']
+     enabled: true
+     poeEnabled: true
+     type: access
+     vlan: 20
+     voiceVlan: null
+     allowedVlans: all
+     isolationEnabled: false
+     rstpEnabled: true
+     stpGuard: disabled
+     linkNegotiation: "Auto negotiate"
+     portScheduleId: null
+     udld: "Alert only"
+

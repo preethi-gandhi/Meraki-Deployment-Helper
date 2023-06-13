@@ -1,0 +1,222 @@
+---
+site: 'CL Pod 01'
+network_id: ''
+network_type: ['appliance','switch','wireless']
+network_tags: ['new']
+
+address:
+  streetAddressLine1: 200 Main St
+  streetAddressLine2: ''
+  streetAddressLine3: ''
+  city: Dallas
+  countrySubdivisionCode: TX
+  countryCode: US
+  postalCode: ''
+
+inventory:
+  devicelist: [MX1, MS1, MR1]
+  MX1:
+    name: 'Pod01-R1'
+    serial: XXXX-XXXX-XXXX
+    model: MX85
+    type: appliance
+    tags: ['new']
+  MS1:
+    name: 'Pod01-SW1'
+    serial: YYYY-YYYY-YYYY
+    model: MS250-24P
+    type: switch
+    tags: ['new']
+  MR1:
+    name: 'Pod01-AP1'
+    serial: ZZZZ-ZZZZ-ZZZZ
+    model: MR36
+    type: wireless
+    tags: ['new', 'zone1']
+
+alert_settings:
+  default_recipients:
+    emails: 
+    - cl-pod-admin1@cisco.com
+    - cl-pod-admin2@cisco.com
+    allAdmins: false
+  alerts:
+    - type: gatewayDown
+      enabled: true
+      alertDestinations:
+        emails: []
+        snmp: false
+        allAdmins: false
+        httpServerIds: []
+      filters:
+        timeout: 15
+    - type: rogueAp
+      enabled: true
+      alertDestinations:
+        emails: []
+        snmp: false
+        allAdmins: false
+        httpServerIds: []
+      filters: {}
+
+    
+wireless:
+  ssids:
+    ssid-1:
+      number: 0
+      name: 'Site-Guest'
+      enabled: true
+      splashPage: None
+      ssidAdminAccessible: false
+      authMode: open
+      ipAssignmentMode: Bridge mode
+      useVlanTagging: true
+      defaultVlanId: 30
+      minBitrate: 12
+      bandSelection: 5 GHz band only
+      perClientBandwidthLimitUp: 0
+      perClientBandwidthLimitDown: 0
+      perSsidBandwidthLimitUp: 0
+      perSsidBandwidthLimitDown: 0
+      mandatoryDhcpEnabled: false
+      lanIsolationEnabled: true
+      visible: true
+      availableOnAllAps: false
+      availabilityTags:
+      - zone1
+      speedBurst:
+        enabled: false
+    ssid-2:
+      number: 1
+      name: Site-Employee
+      enabled: true
+      splashPage: None
+      ssidAdminAccessible: false
+      authMode: psk
+      psk: Connect123
+      dot11w:
+        enabled: false
+        required: false
+      dot11r:
+        enabled: false
+        adaptive: false
+      encryptionMode: wpa
+      wpaEncryptionMode: WPA2 only
+      ipAssignmentMode: Bridge mode
+      useVlanTagging: true
+      defaultVlanId: 20
+      minBitrate: 12
+      bandSelection: 5 GHz band only
+      perClientBandwidthLimitUp: 0
+      perClientBandwidthLimitDown: 0
+      perSsidBandwidthLimitUp: 0
+      perSsidBandwidthLimitDown: 0
+      mandatoryDhcpEnabled: false
+      lanIsolationEnabled: false
+      visible: false
+      availableOnAllAps: false
+      availabilityTags:
+      - zone1
+      - zone2
+      speedBurst:
+        enabled: false
+  
+  rfprofiles:
+    rfp-1:
+      name: Zone1
+      bandSelectionType: ap
+      clientBalancingEnabled: true
+      apBandSettings:
+        bandOperationMode: dual
+        bandSteeringEnabled: false
+      twoFourGhzSettings:
+        maxPower: 5
+        minPower: 5
+        minBitrate: 5.5
+        rxsop:
+        validAutoChannels:
+        - 1
+        - 6
+        - 11
+        axEnabled: true
+      fiveGhzSettings:
+        maxPower: 8
+        minPower: 8
+        minBitrate: 12
+        rxsop:
+        validAutoChannels:
+        - 36
+        - 40
+        - 44
+        - 48
+        - 52
+        - 56
+        - 60
+        - 64
+        - 100
+        - 104
+        - 108
+        - 116
+        - 120
+        - 124
+        - 128
+        - 132
+        - 136
+        - 140
+        - 149
+        - 153
+        - 157
+        - 161
+        - 165
+        channelWidth: auto
+      transmission:
+        enabled: true
+    rfp-2:
+      name: Zone2
+      bandSelectionType: ap
+      clientBalancingEnabled: true
+      apBandSettings:
+        bandOperationMode: dual
+        bandSteeringEnabled: false
+      twoFourGhzSettings:
+        maxPower: 14
+        minPower: 5
+        minBitrate: 11
+        rxsop:
+        validAutoChannels:
+        - 1
+        - 6
+        - 11
+        axEnabled: true
+      fiveGhzSettings:
+        maxPower: 21
+        minPower: 14
+        minBitrate: 12
+        rxsop:
+        validAutoChannels:
+        - 36
+        - 40
+        - 44
+        - 48
+        - 52
+        - 56
+        - 60
+        - 64
+        - 100
+        - 104
+        - 108
+        - 116
+        - 120
+        - 124
+        - 128
+        - 132
+        - 136
+        - 140
+        - 149
+        - 153
+        - 157
+        - 161
+        - 165
+        channelWidth: '20'
+      transmission:
+        enabled: true
